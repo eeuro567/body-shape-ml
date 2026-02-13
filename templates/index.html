@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ระบบวิเคราะห์รูปร่างร่างกายด้วย AI</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>ระบบวิเคราะห์รูปร่างร่างกายด้วย AI</h2>
+<p>กรุณากรอกสัดส่วนร่างกายของคุณ</p>
+
+<form method="POST">
+
+<label>เพศ</label>
+<select name="gender">
+    <option value="female">หญิง</option>
+    <option value="male">ชาย</option>
+</select>
+
+<label>ไหล่ (cm)</label>
+<input type="number" step="any" name="shoulder" required>
+
+<label>รอบอก (cm)</label>
+<input type="number" step="any" name="bust" required>
+
+<label>รอบเอว (cm)</label>
+<input type="number" step="any" name="waist" required>
+
+<label>สะโพก (cm)</label>
+<input type="number" step="any" name="hip" required>
+
+<label>น้ำหนัก (kg)</label>
+<input type="number" step="any" name="weight" required>
+
+<label>ส่วนสูง (cm)</label>
+<input type="number" step="any" name="height" required>
+
+<button type="submit">ทำนายรูปร่าง</button>
+
+</form>
+
+{% if prediction %}
+<div class="result">
+<p>ค่า WHR ที่ระบบ AI ทำนาย: <b>{{prediction}}</b></p>
+<p class="shape">รูปร่างร่างกายของคุณคือ: {{shape}}</p>
+
+<div class="shape-image">
+    <img src="{{ url_for('static', filename='images/' + image_file) }}" width="200">
+</div>
+
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>
